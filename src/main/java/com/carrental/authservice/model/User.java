@@ -1,12 +1,10 @@
+
 package com.carrental.authservice.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-//import org.springframework.context.annotation.Role;
 
 @Entity
 @Table(name = "users")
@@ -14,25 +12,40 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
+
 
     private String name;
 
     @Column(unique = true)
     private String email;
 
-    private String password;
     private String phone;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String password;  // stored from Auth Service OR encrypted
 
-    @CreatedDate
-    @Column(updatable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(length = 50)
+    private UserRole role;
+
+    private String address;
+
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @Column(name = "reset_token")
+    private String resetToken;
+
+    @Column(name = "reset_token_expiry")
+    private LocalDateTime resetTokenExpiry;
 }

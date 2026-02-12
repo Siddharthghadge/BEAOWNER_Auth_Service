@@ -1,23 +1,24 @@
 package com.carrental.authservice.dto;
 
-public class RegisterRequest {
+public class CreateUserRequest {
     private String name;
     private String email;
     private String password;
     private String phone;
-    private String role;
     private String address;
+    private String role;
+    private String created_at;
 
-    public RegisterRequest() {
-    }
+    public CreateUserRequest() {}
 
-    public RegisterRequest(String name, String email, String password, String phone, String role, String address) {
+    public CreateUserRequest(String name, String email, String password, String phone, String address, String role, String created_at) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.role = role;
         this.address = address;
+        this.role = role;
+        this.created_at = created_at;
     }
 
     public String getName() {
@@ -52,6 +53,14 @@ public class RegisterRequest {
         this.phone = phone;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getRole() {
         return role;
     }
@@ -60,11 +69,11 @@ public class RegisterRequest {
         this.role = role;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 }
