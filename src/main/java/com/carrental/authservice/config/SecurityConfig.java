@@ -23,7 +23,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
 
     // Frontend URL from environment (deployment safe)
-    @Value("${FRONTEND_URL}")
+    @Value("${app.frontend.url}")
     private String frontendUrl;
 
     // Manual constructor — replaces @RequiredArgsConstructor
